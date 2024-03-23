@@ -7,18 +7,18 @@ import Footer from '../Footer/Footer'
 import TaskList from '../TaskList/TaskList'
 
 class App extends Component {
-  
-constructor() {
-  state = {
-    todoData: [],
-    status: 'all',
+  constructor() {
+    super()
+    this.state = {
+      todoData: [],
+      status: 'all',
+    }
   }
-}
   createTodoTask(label) {
-	maxId = 100;
+    let maxId = 100
     return {
       label,
-      id: this.maxId++,
+      id: maxId++,
       done: false,
       edit: false,
       createDate: new Date(),
@@ -61,7 +61,7 @@ constructor() {
   }
 
   changeStatus = (value) => {
-    this.setState(({ status }) => {
+    this.setState(() => {
       return {
         status: value,
       }
