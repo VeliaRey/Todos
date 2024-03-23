@@ -15,10 +15,9 @@ class App extends Component {
 		}
 	}
 	createTodoTask(label) {
-		let maxId = 100
 		return {
 			label,
-			id: maxId++,
+			id: Math.ceil(Math.random() * (1000000 - 100000) - 100000),
 			done: false,
 			edit: false,
 			createDate: new Date(),
@@ -117,7 +116,6 @@ class App extends Component {
 
 	render() {
 		const doneCount = this.state.todoData.filter((el) => !el.done).length
-		console.log(this.state)
 
 		return (
 			<>
