@@ -21,38 +21,61 @@ class Task extends Component {
 	}
 
 	render() {
-		const { label, onDeletedTask, done, onCheckedTask, editTask, edit, editLabel, createDate } = this.props
+		const {
+			label,
+			onDeletedTask,
+			done,
+			onCheckedTask,
+			editTask,
+			edit,
+			editLabel,
+			createDate,
+			onTimerStart,
+			onTimerStop,
+			min,
+			sec,
+		} = this.props
 		const { newLabel } = this.state
 
 		const handleClick = (e) => {
+			// e.stopPropagation()
 			e.stopPropagation()
 			editTask()
 		}
 
 		const handleEdit = (event) => {
+			// event.stopPropagation()
 			event.preventDefault()
 			editLabel(newLabel)
 			editTask()
 		}
 
 		const handleChange = (e) => {
+			// e.stopPropagation()
 			this.setState(() => {
 				return {
 					newLabel: e.target.value,
 				}
 			})
 		}
-		// const currentDate = ;
 
 		var result = formatDistanceToNow(createDate, { includeSeconds: true })
 
 		return (
 			<li className={done ? 'completed' : edit ? 'editing' : null}>
-				<div className="view" onClick={onCheckedTask}>
-					<input id={this.id} className="toggle" type="checkbox" checked={done} readOnly />
-					<label>
-						<span className="description">{label}</span>
-						<span className="created">created {result} ago</span>
+				<div className="view">
+					<input id="check" className="toggle" type="checkbox" checked={done} readOnly onClick={onCheckedTask} />
+					<label htmlFor="check">
+						<span className="title">{label}</span>
+						<span className="description">
+							<button className="icon icon-play" onClick={onTimerStart}></button>
+							<button className="icon icon-pause" onClick={onTimerStop}></button>
+							<p className="time-task">
+								{min < 10 ? `0${min}` : min}:{sec < 10 ? `0${sec}` : sec}
+							</p>
+						</span>
+						<span className="description">created {result} ago</span>
+						{/* <span className="created"></span> */}
 					</label>
 					<button className="icon icon-edit" onClick={handleClick}></button>
 					<button className="icon icon-destroy" onClick={onDeletedTask}></button>

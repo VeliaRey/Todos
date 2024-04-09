@@ -19,7 +19,7 @@ class TaskList extends Component {
 	}
 
 	render() {
-		const { todos, onDeletedTask, onCheckedTask, editTask, editLabel } = this.props
+		const { todos, onDeletedTask, onCheckedTask, editTask, editLabel, onTimerStart, onTimerStop } = this.props
 		const elements = todos.map((item) => {
 			const { id, ...itemProps } = item
 
@@ -31,6 +31,8 @@ class TaskList extends Component {
 					onCheckedTask={() => onCheckedTask(id)}
 					editTask={() => editTask(id)}
 					editLabel={editLabel}
+					onTimerStart={() => onTimerStart(id)}
+					onTimerStop={() => onTimerStop(id)}
 				/>
 			)
 		})

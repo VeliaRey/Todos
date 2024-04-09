@@ -11,16 +11,20 @@ class App extends Component {
 		super()
 		this.state = {
 			todoData: [],
-			status: 'all',
+			status: 'All',
 		}
 	}
-	createTodoTask(label) {
+	createTodoTask(label, min, sec) {
 		return {
 			label,
 			id: Math.ceil(Math.random() * (1000000 - 100000) - 100000),
 			done: false,
 			edit: false,
 			createDate: new Date(),
+			min,
+			sec,
+			timerStart: false,
+			timerID: null,
 		}
 	}
 
@@ -35,8 +39,8 @@ class App extends Component {
 		})
 	}
 
-	onAddedTask = (text) => {
-		const newItem = this.createTodoTask(text)
+	onAddedTask = (text, min, sec) => {
+		const newItem = this.createTodoTask(text, min, sec)
 
 		this.setState(({ todoData }) => {
 			const newArr = [...todoData, newItem]
@@ -114,9 +118,85 @@ class App extends Component {
 		})
 	}
 
+	onTimerStart = (id) => {
+		const { timerStart, min, sec } = this.state.todoData.find((el) => el.id === id)
+		if (Number(min) + Number(sec)) {
+			if (!timerStart) {
+				const timerID = setInterval(
+					() =>
+						this.setState((prevState) => {
+							const newTodo = prevState.todoData.map((todoItem) => {
+								if (todoItem.id === id) {
+									let stop = todoItem.min + todoItem.sec
+									stop -= 1
+
+									if (stop === 0) {
+										clearInterval(timerID)
+									}
+
+									let seconds = todoItem.sec - 1
+									let minutes = todoItem.min
+
+									if (minutes > 0 && seconds < 0) {
+										minutes -= 1
+										seconds = 59
+									}
+
+									if (minutes === 0 && seconds < 0) {
+										seconds = 0
+										this.onTimerStop(id)
+									}
+
+									return {
+										...todoItem,
+										sec: seconds,
+										min: minutes,
+									}
+								}
+								return todoItem
+							})
+
+							return {
+								todoData: newTodo,
+							}
+						}),
+					1000
+				)
+
+				this.setState(({ todoData }) => {
+					const idx = todoData.findIndex((el) => el.id === id)
+					const data = [...todoData]
+					data[idx].timerID = timerID
+					data[idx].timerStart = true
+
+					return {
+						todoData: data,
+					}
+				})
+			}
+		}
+	}
+
+	onTimerStop = (id) => {
+		const { timerStart } = this.state.todoData.find((el) => el.id === id)
+		if (timerStart) {
+			const { timerID } = this.state.todoData.find((el) => el.id === id)
+			this.setState(({ todoData }) => {
+				const idx = todoData.findIndex((el) => el.id === id)
+				const data = [...todoData]
+				data[idx].timerStart = false
+
+				return {
+					todoData: data,
+				}
+			})
+			clearInterval(timerID)
+		}
+	}
+
 	render() {
 		const doneCount = this.state.todoData.filter((el) => !el.done).length
-
+		const { status } = this.state
 		return (
 			<>
 				<NewTaskForm onAddedTask={this.onAddedTask} />
@@ -126,8 +206,15 @@ class App extends Component {
 					onCheckedTask={this.onCheckedTask}
 					editTask={this.editTask}
 					editLabel={this.editLabel}
+					onTimerStart={this.onTimerStart}
+					onTimerStop={this.onTimerStop}
 				/>
-				<Footer doneCount={doneCount} changeStatus={this.changeStatus} clearCompleted={this.clearCompleted} />
+				<Footer
+					doneCount={doneCount}
+					changeStatus={this.changeStatus}
+					clearCompleted={this.clearCompleted}
+					status={status}
+				/>
 			</>
 		)
 	}

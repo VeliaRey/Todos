@@ -13,20 +13,23 @@ class TasksFilter extends Component {
 	}
 
 	render() {
-		const { changeStatus } = this.props
-
+		const { changeStatus, status } = this.props
 		return (
 			<ul className="filters">
 				<li>
-					<button className="selected" onClick={() => changeStatus('All')}>
+					<button className={status === 'All' ? 'selected' : ''} onClick={() => changeStatus('All')}>
 						All
 					</button>
 				</li>
 				<li>
-					<button onClick={() => changeStatus('Active')}>Active </button>
+					<button className={status === 'Active' ? 'selected' : ''} onClick={() => changeStatus('Active')}>
+						Active{' '}
+					</button>
 				</li>
 				<li>
-					<button onClick={() => changeStatus('Completed')}>Completed</button>
+					<button className={status === 'Completed' ? 'selected' : ''} onClick={() => changeStatus('Completed')}>
+						Completed
+					</button>
 				</li>
 			</ul>
 		)
