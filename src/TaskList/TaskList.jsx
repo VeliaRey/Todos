@@ -18,7 +18,6 @@ const TaskList = ({ todos, onDeletedTask, onCheckedTask, editTask, editLabel, on
 		editTask: PropTypes.func,
 	}
 
-	
 	const elements = todos.map((item) => {
 		const { id, ...itemProps } = item
 
@@ -40,7 +39,6 @@ const TaskList = ({ todos, onDeletedTask, onCheckedTask, editTask, editLabel, on
 			<ul className="todo-list">{elements}</ul>
 		</section>
 	)
-	
 }
 
 export default TaskList
