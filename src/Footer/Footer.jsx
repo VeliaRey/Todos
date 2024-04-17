@@ -16,9 +16,6 @@ const Footer = ({ doneCount, changeStatus, clearCompleted, status }) => {
 		clearCompleted: PropTypes.func,
 	}
 
-	// render() {
-	// const { doneCount, changeStatus, clearCompleted, status } = this.props
-
 	return (
 		<footer className="footer">
 			<span className="todo-count">{doneCount} items left</span>
@@ -28,7 +25,6 @@ const Footer = ({ doneCount, changeStatus, clearCompleted, status }) => {
 			</button>
 		</footer>
 	)
-	// }
 }
 
 export default Footer

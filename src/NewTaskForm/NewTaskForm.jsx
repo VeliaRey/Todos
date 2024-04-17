@@ -1,23 +1,12 @@
 import React, { useState } from 'react'
-// import ReactDOM from "react-dom";
+
 import './NewTaskForm.css'
 
 const NewTaskForm = ({ onAddedTask }) => {
 	const [label, setLabel] = useState('')
 	const [min, setMin] = useState('')
 	const [sec, setSec] = useState('')
-	// constructor() {
-	// 	super()
-	// 	this.state = {
-	// 		label: '',
-	// 		min: '',
-	// 		sec: '',
-	// 	}
-	// }
 
-	// render() {
-	// const { onAddedTask } = this.props
-	// const { label, min, sec } = this.state
 	const addedTask = (event) => {
 		event.stopPropagation()
 		event.preventDefault()
@@ -25,31 +14,17 @@ const NewTaskForm = ({ onAddedTask }) => {
 		setLabel('')
 		setMin('')
 		setSec('')
-		// this.setState({
-		// 	label: '',
-		// 	min: '',
-		// 	sec: '',
-		// })
 	}
 
 	const addedTaskLabel = (e) => {
-		// this.setState({
-		// 	label: e.target.value,
-		// })
 		setLabel(e.target.value)
 	}
 
 	const addedTaskMin = (e) => {
-		// this.setState({
-		// 	min: e.target.value,
-		// })
 		setMin(e.target.value)
 	}
 
 	const addedTaskSec = (e) => {
-		// this.setState({
-		// 	sec: e.target.value,
-		// })
 		setSec(e.target.value)
 	}
 
@@ -64,6 +39,5 @@ const NewTaskForm = ({ onAddedTask }) => {
 			</form>
 		</header>
 	)
-	// }
 }
 export default NewTaskForm

@@ -1,5 +1,4 @@
 import React from 'react'
-// import ReactDOM from "react-dom";
 import PropTypes from 'prop-types'
 import './TasksFilter.css'
 
@@ -12,8 +11,6 @@ const TasksFilter = ({ changeStatus, status }) => {
 		changeStatus: PropTypes.func,
 	}
 
-	// render() {
-	// const { changeStatus, status } = this.props
 	return (
 		<ul className="filters">
 			<li>
@@ -33,7 +30,6 @@ const TasksFilter = ({ changeStatus, status }) => {
 			</li>
 		</ul>
 	)
-	// }
 }
 
 export default TasksFilter

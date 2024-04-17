@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import ReactDOM from "react-dom";
+
 import './App.css'
 
 import NewTaskForm from '../NewTaskForm/NewTaskForm'
@@ -10,13 +10,6 @@ const App = () => {
 	const [todoData, setTodoData] = useState([])
 	const [status, setStatus] = useState('All')
 
-	// constructor() {
-	// 	super()
-	// 	this.state = {
-	// 		todoData: [],
-	// 		status: 'All',
-	// 	}
-	// }
 	const createTodoTask = (label, min, sec) => {
 		const data = {
 			label,
@@ -33,30 +26,22 @@ const App = () => {
 	}
 
 	const onDeletedTask = (id) => {
-		// this.setState(({ todoData }) => {
 		const idx = todoData.findIndex((el) => el.id === id)
 
 		const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)]
 
 		setTodoData(newArray)
-
-		// })
 	}
 
 	const onAddedTask = (text, min, sec) => {
 		const newItem = createTodoTask(text, min, sec)
 
-		// this.setState(({ todoData }) => {
 		const newArr = [...todoData, newItem]
-		// return {
+
 		setTodoData(newArr)
-		// }
-		// })
 	}
 
 	const onCheckedTask = (id) => {
-		// this.setState(({ todoData }) => {
-		// 	return {
 		const doneTask = todoData.map((el) => {
 			if (el.id === id) {
 				el.done = !el.done
@@ -64,21 +49,13 @@ const App = () => {
 			return el
 		})
 		setTodoData(doneTask)
-		// 	}
-		// })
 	}
 
 	const changeStatus = (value) => {
-		// this.setState(() => {
-		// 	return {
 		setStatus(value)
-		// 	}
-		// })
 	}
 
 	const taskFilter = () => {
-		// const { status, todoData } = this.state
-
 		if (status === 'Completed') {
 			return todoData.filter((el) => el.done === true)
 		} else if (status === 'Active') {
@@ -89,17 +66,12 @@ const App = () => {
 	}
 
 	const clearCompleted = () => {
-		// this.setState(({ todoData }) => {
 		const newArray = todoData.filter((el) => el.done === false)
-		// return {
+
 		setTodoData(newArray)
-		// }
-		// })
 	}
 
 	const editTask = (id) => {
-		// this.setState(({ todoData }) => {
-		// 	return {
 		const editingTask = todoData.map((el) => {
 			if (el.id === id) {
 				el.edit = !el.edit
@@ -107,13 +79,9 @@ const App = () => {
 			return el
 		})
 		setTodoData(editingTask)
-		// 	}
-		// })
 	}
 
 	const editLabel = (label) => {
-		// this.setState(({ todoData }) => {
-		// 	return {
 		const editingLabel = todoData.map((el) => {
 			if (el.edit) {
 				el.label = label
@@ -121,8 +89,6 @@ const App = () => {
 			return el
 		})
 		setTodoData(editingLabel)
-		// 	}
-		// })
 	}
 
 	const onTimerStart = (id) => {
@@ -164,8 +130,6 @@ const App = () => {
 							})
 
 							return newTodo
-							// // }
-							// setTodoData(newTodo)
 						}),
 					1000
 				)
@@ -197,9 +161,8 @@ const App = () => {
 		}
 	}
 
-	// render() {
 	const doneCount = todoData.filter((el) => !el.done).length
-	// const { status } = this.state
+
 	return (
 		<>
 			<NewTaskForm onAddedTask={onAddedTask} />
@@ -215,7 +178,6 @@ const App = () => {
 			<Footer doneCount={doneCount} changeStatus={changeStatus} clearCompleted={clearCompleted} status={status} />
 		</>
 	)
-	// }
 }
 
 export default App

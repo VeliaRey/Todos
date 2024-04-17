@@ -30,27 +30,6 @@ const Task = ({
 		onCheckedTask: PropTypes.func,
 	}
 
-	// state = {
-	// 	newLabel: '',
-	// }
-
-	// render() {
-	// const {
-	// 	label,
-	// 	onDeletedTask,
-	// 	done,
-	// 	onCheckedTask,
-	// 	editTask,
-	// 	edit,
-	// 	editLabel,
-	// 	createDate,
-	// 	onTimerStart,
-	// 	onTimerStop,
-	// 	min,
-	// 	sec,
-	// } = this.props
-	// const { newLabel } = this.state
-
 	const handleClick = (e) => {
 		e.stopPropagation()
 		editTask()
@@ -63,11 +42,6 @@ const Task = ({
 	}
 
 	const handleChange = (e) => {
-		// this.setState(() => {
-		// 	return {
-		// 		newLabel: e.target.value,
-		// 	}
-		// })
 		setNewLabel(e.target.value)
 	}
 
@@ -87,7 +61,6 @@ const Task = ({
 						</p>
 					</span>
 					<span className="description">created {result} ago</span>
-					{/* <span className="created"></span> */}
 				</label>
 				<button className="icon icon-edit" onClick={handleClick}></button>
 				<button className="icon icon-destroy" onClick={onDeletedTask}></button>
@@ -99,7 +72,6 @@ const Task = ({
 			)}
 		</li>
 	)
-	// }
 }
 
 export default Task
