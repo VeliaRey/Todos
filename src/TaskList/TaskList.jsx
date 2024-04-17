@@ -18,8 +18,7 @@ const TaskList = ({ todos, onDeletedTask, onCheckedTask, editTask, editLabel, on
 		editTask: PropTypes.func,
 	}
 
-	// render() {
-	// const { todos, onDeletedTask, onCheckedTask, editTask, editLabel, onTimerStart, onTimerStop } = this.props
+	
 	const elements = todos.map((item) => {
 		const { id, ...itemProps } = item
 
@@ -41,7 +40,7 @@ const TaskList = ({ todos, onDeletedTask, onCheckedTask, editTask, editLabel, on
 			<ul className="todo-list">{elements}</ul>
 		</section>
 	)
-	// }
+	
 }
 
 export default TaskList
