@@ -74,6 +74,10 @@
 	display: flex;
 }
 
+.description-hidden {
+	display: none;
+}
+
 .todo-list li label .title {
 	word-break: break-all;
 	display: block;

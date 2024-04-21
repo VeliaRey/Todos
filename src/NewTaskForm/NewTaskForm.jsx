@@ -25,7 +25,11 @@ const NewTaskForm = ({ onAddedTask }) => {
 	}
 
 	const addedTaskSec = (e) => {
-		setSec(e.target.value)
+		if (e.target.value > 59) {
+			setSec(59)
+		} else {
+			setSec(e.target.value)
+		}
 	}
 
 	return (

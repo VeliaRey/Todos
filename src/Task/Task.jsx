@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { nanoid } from 'nanoid'
 import PropTypes from 'prop-types'
 import './Task.css'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -18,6 +19,7 @@ const Task = ({
 	sec,
 }) => {
 	const [newLabel, setNewLabel] = useState('')
+	const [labelId, setLabelId] = useState('')
 	Task.defaultProps = {
 		onCheckedTask: () => {},
 		onDeletedTask: () => {},
@@ -45,15 +47,18 @@ const Task = ({
 		setNewLabel(e.target.value)
 	}
 
+	useEffect(() => {
+		setLabelId(nanoid())
+	}, [])
 	var result = formatDistanceToNow(createDate, { includeSeconds: true })
 
 	return (
 		<li className={done ? 'completed' : edit ? 'editing' : null}>
 			<div className="view">
-				<input id="check" className="toggle" type="checkbox" checked={done} readOnly onClick={onCheckedTask} />
-				<label htmlFor="check">
+				<input id={labelId} className="toggle" type="checkbox" checked={done} readOnly onClick={onCheckedTask} />
+				<label htmlFor={labelId}>
 					<span className="title">{label}</span>
-					<span className="description">
+					<span className={min.length !== 0 && sec.length !== 0 ? 'description' : 'description-hidden'}>
 						<button className="icon icon-play" onClick={onTimerStart}></button>
 						<button className="icon icon-pause" onClick={onTimerStop}></button>
 						<p className="time-task">

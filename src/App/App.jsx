@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { nanoid } from 'nanoid'
 
 import './App.css'
 
@@ -9,11 +10,10 @@ import TaskList from '../TaskList/TaskList'
 const App = () => {
 	const [todoData, setTodoData] = useState([])
 	const [status, setStatus] = useState('All')
-
 	const createTodoTask = (label, min, sec) => {
 		const data = {
 			label,
-			id: Math.ceil(Math.random() * (1000000 - 100000) - 100000),
+			id: nanoid(),
 			done: false,
 			edit: false,
 			createDate: new Date(),
@@ -42,6 +42,7 @@ const App = () => {
 	}
 
 	const onCheckedTask = (id) => {
+		console.log(id)
 		const doneTask = todoData.map((el) => {
 			if (el.id === id) {
 				el.done = !el.done
